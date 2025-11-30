@@ -1,0 +1,20 @@
+[package]
+name = "aoc-2025"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+authors = ["Tom-the-Bomb"]
+description = "Rust solutions for the 2025 Advent of Code"
+repository = "https://github.com/Tom-the-Bomb/aoc-2025"
+keywords = ["adventofcode", "aoc"]
+categories = ["Algorithms", "Command line utilities"]
+
+[profile.release]
+overflow-checks = true
+lto = "fat"
+
+[dependencies]
+
+[[bin]]
+name = "day1"
+path = "src/bin/day1.rs"
