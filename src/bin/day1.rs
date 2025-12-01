@@ -1,4 +1,4 @@
-//! Day 1: ...
+//! Day 1: Secret Entrance
 //!
 //! <https://adventofcode.com/2025/day/1>
 use std::fmt::Display;
@@ -7,14 +7,51 @@ use aoc_2025::Solution;
 pub struct Day1;
 
 impl Solution for Day1 {
-    const NAME: &'static str = "";
+    const NAME: &'static str = "Secret Entrance";
 
     fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1 {
-        todo!()
+        let mut dial = 50;
+
+        inp
+            .to_string()
+            .lines()
+            .filter(|line| {
+                let (op, val) = line.split_at(1);
+                let mut val = val.parse::<isize>().unwrap();
+
+                if op == "L" { val *= -1; }
+
+                dial += val;
+                dial = dial.rem_euclid(100);
+
+                dial == 0
+            })
+            .count()
     }
 
     fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2 {
-        todo!()
+        let mut dial = 50;
+
+        inp
+            .to_string()
+            .lines()
+            .map(|line| {
+                let (op, val) = line.split_at(1);
+                let mut val = val.parse::<isize>().unwrap();
+
+                if op == "L" { val *= -1; }
+
+                let mut zeroes = if dial == 0 && val < 0 { -1 } else { 0 };
+                dial += val;
+
+                zeroes += dial.div_euclid(100).abs();
+                dial = dial.rem_euclid(100);
+
+                if dial == 0 && val < 0 { zeroes += 1; }
+
+                zeroes
+            })
+            .sum::<isize>().cast_unsigned()
     }
 
     fn run(&self, inp: String) {
@@ -24,8 +61,8 @@ impl Solution for Day1 {
         println!("Part 1: {p1}");
         println!("Part 2: {p2}");
 
-        assert_eq!(p1, todo!());
-        assert_eq!(p2, todo!());
+        assert_eq!(p1, 1195);
+        assert_eq!(p2, 6770);
     }
 }
 
