@@ -15,7 +15,6 @@ class Day4(Solution):
 
     def part_one(self, inp: str) -> int:
         grid = inp.splitlines()
-        count = 0
 
         n_rows = len(grid)
         n_cols = len(grid[0])

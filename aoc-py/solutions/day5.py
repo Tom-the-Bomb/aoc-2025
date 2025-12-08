@@ -25,6 +25,7 @@ class Day5(Solution):
         )
 
     def part_two(self, inp: str) -> int:
+        # sort ranges so overlapping ranges will be found consecutively
         ranges = sorted(
             tuple(int(p) for p in r.split('-'))
             for r in inp.split('\n\n')[0].splitlines()
