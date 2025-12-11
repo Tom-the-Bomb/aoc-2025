@@ -7,8 +7,6 @@ __all__ = ('Day6',)
 
 from typing import ClassVar
 from math import prod
-from itertools import count
-import re
 
 from ..solution import Solution
 
