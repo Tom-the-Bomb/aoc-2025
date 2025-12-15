@@ -61,22 +61,27 @@ class Day10(Solution):
         total = 0
 
         for _, schematics, target in self._parse_input(inp):
+            # use z3 optimizer to solve the system of linear equations
+            #
+            # [# of variables = # of schematics]
+            # [# of equations = # of target joltages]
             opt = Optimize()
-            # `n{i}` represents the number of times schematic `i` is pulled
+            # the variable `n{i}` represents the number of times schematic `i` is pulled
             vars = Ints(f'n{i}' for i in range(len(schematics)))
             # number of pulls must be non-negative
             for v in vars:
                 opt.add(v >= 0)
             # for each target joltage
             for i, joltage in enumerate(target):
-                # add the linear equation to the system
+                # add a linear equation to the system
                 opt.add(
                     # the equation itself is the sum of each schematic's contribution to the joltage
-                    # this either 0 or 1 depending on if the index of the current joltage is included in the schematic
+                    # this either 0 or 1 (coefficient) depending on if the index of the current joltage is included in the schematic
                     # this is multiplied against `n{i}` (vars[s]) to get the total contribution of that schematic to the joltage
                     # the sum of all schematic contributions must equal the target joltage
                     sum(
-                        vars[s] for s, schematic in enumerate(schematics)
+                        vars[s]
+                        for s, schematic in enumerate(schematics)
                         if i in schematic
                     ) == joltage
                 )
