@@ -46,8 +46,8 @@ class Day7(Solution):
         # we will use the Pascal's triangle (binomial coefficient) unique paths counting algorithm
         # the (# of paths) to the current cell is the sum of the (# of paths) that reach this cell from the above row
         # i.e.
-        # .|.|..| is actually .1.1..1
-        # |^|^|.|             1^2^1.1
+        # ..|.|..| is actually ..1.1..1
+        # .|^|^|.|             .1^2^1.1 (where `.` is 0 and `^` is -1 in the actual matrix)
         grid = [
             [
                 0 if cell == '.'

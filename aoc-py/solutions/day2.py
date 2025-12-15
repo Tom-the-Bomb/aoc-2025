@@ -14,8 +14,8 @@ class Day2(Solution):
     NAME: ClassVar[str] = 'Gift Shop'
 
     def _get_ids(self, inp: str) -> Iterator[int]:
+        """A generator that is an iterator over every single ID in the union of all ranges from parsing the raw input"""
         ranges = inp.split(',')
-        invalid = 0
 
         for rng in ranges:
             a, b = map(int, rng.split('-', maxsplit=1))
@@ -29,6 +29,8 @@ class Day2(Solution):
         for id_ in self._get_ids(inp):
             str_id = str(id_)
 
+            # checks if first half of string is equal to second half of string
+            # then the ID is invalid
             mid = len(str_id) // 2
 
             if str_id[:mid] == str_id[mid:]:
@@ -41,6 +43,9 @@ class Day2(Solution):
         for id_ in self._get_ids(inp):
             str_id = str(id_)
 
+            # captures a single numeric string (of at least length 1) as the first group: `([0-9]+)`
+            # `\1+` requires at least 1 other match that is identical to the first group (above)
+            # resulting in matching the repetition of a numeric string (number)
             if re.fullmatch(r'([0-9]+)\1+', str_id):
                 invalid += id_
         return invalid
