@@ -35,6 +35,24 @@ class Day12(Solution):
             ) <= w * h
         return count
 
+    def part_one_2(self, inp: str) -> int:
+        """Alternative implementation for part one by allocating a 3x3 block for any shape.
+
+        and checking if the # of 3x3 blocks in the region >= the # of shapes.
+        Therefore, the actual individual shapes do not matter.
+
+        unoptimal packing, but it doesn't matter...
+        """
+        *_, regions = inp.split('\n\n')
+        total = 0
+
+        for region in regions.splitlines():
+            dims, required_shapes = region.split(':')
+            w, h = map(int, dims.split('x'))
+
+            total += (w // 3) * (h // 3) >= sum(int(count) for count in required_shapes.split())
+        return total
+
     def part_two(self, inp: str) -> None:
         """No part 2 for day 12!
 
