@@ -124,6 +124,12 @@ class Day9(Solution):
         n_points = len(points)
 
         for (x1, y1), (x2, y2) in combinations(points, 2):
+            # optimization: check if the area of our rectangle is even larger than current max_area
+            # before we perform expensive checks to check of the rectangle is valid
+            area = (abs(x2 - x1) + 1) * (abs(y2 - y1) + 1)
+            if area <= max_area:
+                continue
+
             # the trick of the problem is to assume that rectangles of maximum area will have dimensions `>= 2`
             # (i.e. lines are non-valid)
             #
@@ -184,10 +190,7 @@ class Day9(Solution):
             if intersects:
                 continue
 
-            max_area = max(
-                max_area,
-                (abs(x2 - x1) + 1) * (abs(y2 - y1) + 1)
-            )
+            max_area = area
         return max_area
 
     def run(self, inp: str) -> None:
