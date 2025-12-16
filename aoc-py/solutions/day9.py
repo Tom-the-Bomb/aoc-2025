@@ -64,8 +64,13 @@ class Day9(Solution):
             # True  (ay > y)  | False (by <= y) | True  (by <= y < ay) where ay < by
             # False (ay <= y) | True  (by > y)  | True  (ay <= y < by) where by < ay
             #
-            # [3] check if the x-coordinate of the point is to the left of the edge
-            # since we're raycasting from the right (leftwards)
+            # [3] check if the x-coordinate of the point is to the left of
+            # where the edge intersects the casted ray since we're raycasting from the right (leftwards)
+            #
+            # NOTE: this is simply the x-coordinate of the vertical edge itself
+            # hence `x < ax`, since our polygon is made of only horizontal and vertical edges
+            # if not, we must develop an expression for the x-coordinate of the intersection point
+            # and use that instead of `ax`
             if ax == bx and (ay > y) != (by > y) and x < ax:
                 inside = not inside
         return inside
