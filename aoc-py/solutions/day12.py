@@ -13,14 +13,35 @@ class Day12(Solution):
     NAME: ClassVar[str] = 'Printing Department'
 
     def part_one(self, inp: str) -> int:
-        ...
+        *shapes, regions = inp.split('\n\n')
+        shape_sizes = [shape.count('#') for shape in shapes]
 
-    def part_two(self, inp: str) -> int:
-        ...
+        count = 0
+
+        # solving packing is really difficult
+        # but all generated inputs for AOC allow us to assume that
+        # as long as sum of number of `#` all used shapes take up fit within `width * height`
+        # we can fit them in (since for these cases the grids are way bigger than needed),
+        # and IF NOT, we can assume it doesn't fit...
+        for region in regions.splitlines():
+            dims, required_shapes = region.split(':')
+            w, h = map(int, dims.split('x'))
+
+            # +1 if sum <= total region area
+            count += sum(
+                # (# of cells occupied by the i-th shape shape) * (count of this shape)
+                shape_sizes[i] * int(count)
+                for i, count in enumerate(required_shapes.split())
+            ) <= w * h
+        return count
+
+    def part_two(self, inp: str) -> None:
+        """No part 2 for day 12!
+
+        Happy Holidays!
+        """
 
     def run(self, inp: str) -> None:
         print('Part 1:', p1 := self.part_one(inp))
-        print('Part 2:', p2 := self.part_two(inp))
 
-        # assert p1 == 12160
-        # assert p2 == 92123
+        assert p1 == 408

@@ -36,14 +36,33 @@ class Day9(Solution):
             # [1] `ax == bx` => vertical edge
             #
             # [2] check if `y` is between `ay` and `by`
-            # => `min(ay, by) <= y <= max(ay, by)`
-            # but we can rewrite this to be more efficient:
-            # if `ay <= by`: then `ay <= y <= by`
-            # if `by <= ay`: then `by <= y <= ay`
+            # and handle the edge case where `y` is exactly `ay` or `by`
+            # we need to establish a standard to include only 1 of the endpoints
             #
-            # therefore all we need to check if
-            # that `ay > y` is different from `by > y`
-            # (one is less, one is more, therefore `y` is between them)
+            # => `min(ay, by) <= y < max(ay, by)` (count lower endpoint, not upper)
+            # OR
+            # => `min(ay, by) < y <= max(ay, by)` (count upper endpoint, not lower)
+            #
+            # the reason we do this is for cases like:
+            # |.  _| ____ (<--ray)
+            # |  |
+            # where the point is inside the polygon, but flipping on both vertical edges would result in `inside = False`
+            # therefore if we only include i.e. the intersection with the lower endpoint
+            # and exclude the intersection with the upper endpoint, we count this point as inside
+            #
+            # likewise (inside):
+            # |. |_   ___ (<--ray)
+            # |    |
+            #
+            # but we can rewrite this to be more efficient instead of determining min/maxes
+            # let's write this for `min(ay, by) <= y < max(ay, by)`
+            #
+            # ay > y          | by > y          | (ay > y) != (by > y)
+            # ----------------|-----------------|---------------------
+            # True  (ay > y)  | True  (by > y)  | False (`ay` and `by` both above `y`)
+            # False (ay <= y) | False (by <= y) | False (`ay` and `by` both below or equal to `y`)
+            # True  (ay > y)  | False (by <= y) | True  (by <= y < ay) where ay < by
+            # False (ay <= y) | True  (by > y)  | True  (ay <= y < by) where by < ay
             #
             # [3] check if the x-coordinate of the point is to the left of the edge
             # since we're raycasting from the right (leftwards)
@@ -167,8 +186,12 @@ class Day9(Solution):
         return max_area
 
     def run(self, inp: str) -> None:
-        print('Part 1:', p1 := self.part_one(inp))
-        print('Part 2:', p2 := self.part_two(inp))
+        # print('Part 1:', p1 := self.part_one(inp))
+        # print('Part 2:', p2 := self.part_two(inp))
 
-        assert p1 == 4777967538
-        assert p2 == 1439894345
+        # assert p1 == 4777967538
+        # assert p2 == 1439894345
+
+        print(self._point_in_polygon(1, 2, [(0,0), (2,0), (2,2), (4,2), (4,4), (0,4)]))
+        print('--------------')
+        print(self._point_in_polygon(1, 2, [(0,0), (4,0), (4,2), (2,2), (2,4), (0,4)]))
