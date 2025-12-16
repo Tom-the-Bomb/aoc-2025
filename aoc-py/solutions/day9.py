@@ -54,11 +54,11 @@ class Day9(Solution):
             # |. |_   ___ (<--ray)
             # |    |
             #
-            # but we can rewrite this to be more efficient instead of determining min/maxes
+            # but we can rewrite this to be more efficient instead of determining the `min` and `max`
             # let's write this for `min(ay, by) <= y < max(ay, by)`
-            #
+            # ----------------+-----------------+---------------------
             # ay > y          | by > y          | (ay > y) != (by > y)
-            # ----------------|-----------------|---------------------
+            # ----------------+-----------------+---------------------
             # True  (ay > y)  | True  (by > y)  | False (`ay` and `by` both above `y`)
             # False (ay <= y) | False (by <= y) | False (`ay` and `by` both below or equal to `y`)
             # True  (ay > y)  | False (by <= y) | True  (by <= y < ay) where ay < by

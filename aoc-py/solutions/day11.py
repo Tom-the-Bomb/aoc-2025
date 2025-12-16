@@ -1,5 +1,5 @@
 """
-Day 11: Printing Department
+Day 11: Reactor
 
 https://adventofcode.com/2025/day/11
 """
@@ -11,7 +11,7 @@ from functools import cache
 from ..solution import Solution
 
 class Day11(Solution):
-    NAME: ClassVar[str] = 'Printing Department'
+    NAME: ClassVar[str] = 'Reactor'
     # we must store the graph as an attribute
     # so that the DFS functions can access it without needing to pass it around
     # this also allows us to cache the arguments (since graphs which are dictionaries are not hashable)

@@ -1,5 +1,5 @@
 """
-Day 6: Printing Department
+Day 6: Trash Compactor
 
 https://adventofcode.com/2025/day/6
 """
@@ -11,7 +11,7 @@ from math import prod
 from ..solution import Solution
 
 class Day6(Solution):
-    NAME: ClassVar[str] = 'Printing Department'
+    NAME: ClassVar[str] = 'Trash Compactor'
 
     def part_one(self, inp: str) -> int:
         grid = [row.split() for row in inp.splitlines()]

@@ -1,5 +1,5 @@
 """
-Day 12: Printing Department
+Day 12: Christmas Tree Farm
 
 https://adventofcode.com/2025/day/12
 """
@@ -10,7 +10,7 @@ from typing import ClassVar
 from ..solution import Solution
 
 class Day12(Solution):
-    NAME: ClassVar[str] = 'Printing Department'
+    NAME: ClassVar[str] = 'Christmas Tree Farm'
 
     def part_one(self, inp: str) -> int:
         *shapes, regions = inp.split('\n\n')
