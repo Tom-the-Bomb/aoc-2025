@@ -186,12 +186,8 @@ class Day9(Solution):
         return max_area
 
     def run(self, inp: str) -> None:
-        # print('Part 1:', p1 := self.part_one(inp))
-        # print('Part 2:', p2 := self.part_two(inp))
+        print('Part 1:', p1 := self.part_one(inp))
+        print('Part 2:', p2 := self.part_two(inp))
 
-        # assert p1 == 4777967538
-        # assert p2 == 1439894345
-
-        print(self._point_in_polygon(1, 2, [(0,0), (2,0), (2,2), (4,2), (4,4), (0,4)]))
-        print('--------------')
-        print(self._point_in_polygon(1, 2, [(0,0), (4,0), (4,2), (2,2), (2,4), (0,4)]))
+        assert p1 == 4777967538
+        assert p2 == 1439894345
