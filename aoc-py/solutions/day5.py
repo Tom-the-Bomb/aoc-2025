@@ -31,7 +31,7 @@ class Day5(Solution):
             for r in inp.split('\n\n')[0].splitlines()
         )
 
-        i = 0
+        i = 1
         # merge overlapping ranges together (union)
         while i < len(ranges):
             a0, b0 = ranges[i - 1]

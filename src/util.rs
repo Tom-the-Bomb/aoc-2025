@@ -35,6 +35,21 @@ pub const fn neighbors_diag(row: usize, col: usize) -> [(usize, usize); 4] {
 }
 
 #[must_use]
+#[inline]
+pub const fn neighbors(row: usize, col: usize) -> [(usize, usize); 8] {
+    [
+        (row, col.wrapping_sub(1)),
+        (row, col.wrapping_add(1)),
+        (row.wrapping_sub(1), col),
+        (row.wrapping_add(1), col),
+        (row.wrapping_sub(1), col.wrapping_sub(1)),
+        (row.wrapping_sub(1), col.wrapping_add(1)),
+        (row.wrapping_add(1), col.wrapping_sub(1)),
+        (row.wrapping_add(1), col.wrapping_add(1))
+    ]
+}
+
+#[must_use]
 pub fn gcd(a: usize, b: usize) -> usize {
     if b == 0 { a } else { gcd(b, a % b) }
 }
