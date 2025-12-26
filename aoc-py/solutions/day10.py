@@ -25,12 +25,6 @@ class Day10(Solution):
 
             yield lights, schematics, joltages
 
-    def _toggle(self, lights: list[str], schematic: tuple[int, ...]) -> list[str]:
-        lights = lights[:]
-        for index in schematic:
-            lights[index] = '#' if lights[index] == '.' else '.'
-        return lights
-
     def part_one(self, inp: str) -> int:
         total = 0
 
@@ -44,7 +38,8 @@ class Day10(Solution):
                     lights = ['.'] * len(target)
 
                     for schematic in combo:
-                        lights = self._toggle(lights, schematic)
+                        for index in schematic:
+                            lights[index] = '#' if lights[index] == '.' else '.'
 
                     if lights == target:
                         total += n

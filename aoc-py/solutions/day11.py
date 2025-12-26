@@ -30,7 +30,7 @@ class Day11(Solution):
             return 1
         # recursively DFS all paths to 'out' nodes
         # and sum the number of ways to them (AKA count the number of times the base-case is reached, summing up the 1s each time)
-        return sum(self.dfs_1(child) for child in self.graph.get(node, []))
+        return sum(self.dfs_1(child) for child in self.graph[node])
 
     @cache
     def dfs_2(self, node: str, dac: bool = False, fft: bool = False) -> int:

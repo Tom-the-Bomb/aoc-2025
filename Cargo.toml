@@ -17,6 +17,7 @@ lto = "fat"
 fancy-regex = "^0.17"
 lazy_static = "^1.5"
 itertools = "^0.14"
+good_lp = { version = "^1.14", features = ["microlp"], default-features = false }
 
 [[bin]]
 name = "day1"
@@ -49,3 +50,11 @@ path = "src/bin/day7.rs"
 [[bin]]
 name = "day8"
 path = "src/bin/day8.rs"
+
+[[bin]]
+name = "day9"
+path = "src/bin/day9.rs"
+
+[[bin]]
+name = "day10"
+path = "src/bin/day10.rs"
