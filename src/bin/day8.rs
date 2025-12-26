@@ -3,12 +3,12 @@
 //! <https://adventofcode.com/2025/day/8>
 #![allow(future_incompatible)]
 
+use aoc_2025::Solution;
+use itertools::Itertools;
 use std::{
-    collections::{HashSet, HashMap},
+    collections::{HashMap, HashSet},
     hash::Hash,
 };
-use itertools::Itertools;
-use aoc_2025::Solution;
 
 struct DisjointSet<'a, T>
 where
@@ -29,7 +29,7 @@ where
             parents: nodes
                 .iter()
                 .map(|node| (node, node))
-                .collect::<HashMap<_, _>>()
+                .collect::<HashMap<_, _>>(),
         }
     }
 
@@ -49,8 +49,7 @@ where
         let mut sizes = HashMap::with_capacity(self.parents.len());
 
         for node in self.nodes {
-            *sizes.entry(self.root(node))
-                .or_insert(0) += 1;
+            *sizes.entry(self.root(node)).or_insert(0) += 1;
         }
         sizes
     }
@@ -59,10 +58,9 @@ where
     pub fn count(&mut self) -> usize {
         self.nodes
             .iter()
-            .map(|node| self.root(node)
-        )
-        .collect::<HashSet<_>>()
-        .len()
+            .map(|node| self.root(node))
+            .collect::<HashSet<_>>()
+            .len()
     }
 
     pub fn union(&mut self, node1: &'a T, node2: &'a T) {
@@ -84,8 +82,7 @@ impl Day8 {
         let boxes = inp
             .lines()
             .map(|line| {
-                line
-                    .split(',')
+                line.split(',')
                     .map(|c| c.parse().unwrap())
                     .collect_array()
                     .unwrap()
@@ -96,12 +93,12 @@ impl Day8 {
             .iter()
             .copied()
             .tuple_combinations()
-            .sorted_unstable_by_key(|(a, b)| a
-                .iter()
-                .zip(b.iter())
-                .map(|(&x1, &x2)| x1.abs_diff(x2).pow(2))
-                .sum::<usize>()
-            )
+            .sorted_unstable_by_key(|(a, b)| {
+                a.iter()
+                    .zip(b.iter())
+                    .map(|(&x1, &x2)| x1.abs_diff(x2).pow(2))
+                    .sum::<usize>()
+            })
             .collect::<Vec<_>>();
 
         (boxes, edges)
@@ -119,8 +116,7 @@ impl Solution for Day8 {
             sets.union(box1, box2);
         }
 
-        sets
-            .get_sizes()
+        sets.get_sizes()
             .values()
             .sorted_unstable_by(|a, b| b.cmp(a))
             .take(3)
@@ -168,5 +164,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test() { main(); }
+    fn test() {
+        main();
+    }
 }

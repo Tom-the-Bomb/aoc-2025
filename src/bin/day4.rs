@@ -1,11 +1,7 @@
 //! Day 4: Printing Department
 //!
 //! <https://adventofcode.com/2025/day/4>
-use aoc_2025::{
-    Solution,
-    get_grid,
-    neighbors
-};
+use aoc_2025::{get_grid, neighbors, Solution};
 
 pub struct Day4;
 
@@ -16,21 +12,25 @@ impl Solution for Day4 {
         let grid = get_grid(inp);
 
         let n_rows = 0..grid.len();
-        let n_cols  = 0..grid[0].len();
+        let n_cols = 0..grid[0].len();
 
-        grid
-            .iter()
+        grid.iter()
             .enumerate()
-            .map(|(i, row)| row
-                .iter()
-                .enumerate()
-                .filter(|&(j, &cell)| cell == b'@' && neighbors(i, j)
-                    .iter()
-                    .filter(|(i, j)| n_rows.contains(i) && n_cols.contains(j) && grid[*i][*j] == b'@')
-                    .count() < 4
-                )
-                .count()
-            )
+            .map(|(i, row)| {
+                row.iter()
+                    .enumerate()
+                    .filter(|&(j, &cell)| {
+                        cell == b'@'
+                            && neighbors(i, j)
+                                .iter()
+                                .filter(|(i, j)| {
+                                    n_rows.contains(i) && n_cols.contains(j) && grid[*i][*j] == b'@'
+                                })
+                                .count()
+                                < 4
+                    })
+                    .count()
+            })
             .sum()
     }
 
@@ -38,7 +38,7 @@ impl Solution for Day4 {
         let mut grid = get_grid(inp);
 
         let n_rows = grid.len();
-        let n_cols  = grid[0].len();
+        let n_cols = grid[0].len();
 
         let mut count = 0;
 
@@ -47,14 +47,16 @@ impl Solution for Day4 {
 
             for i in 0..n_rows {
                 for j in 0..n_cols {
-                    if grid[i][j] == b'@' && neighbors(i, j)
-                        .iter()
-                        .filter(|(i, j)|
-                            (0..n_rows).contains(i)
-                            && (0..n_cols).contains(j)
-                            && grid[*i][*j] == b'@'
-                        )
-                        .count() < 4
+                    if grid[i][j] == b'@'
+                        && neighbors(i, j)
+                            .iter()
+                            .filter(|(i, j)| {
+                                (0..n_rows).contains(i)
+                                    && (0..n_cols).contains(j)
+                                    && grid[*i][*j] == b'@'
+                            })
+                            .count()
+                            < 4
                     {
                         grid[i][j] = b'.';
                         accessible += 1;
@@ -91,5 +93,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test() { main(); }
+    fn test() {
+        main();
+    }
 }

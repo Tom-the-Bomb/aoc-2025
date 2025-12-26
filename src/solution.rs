@@ -1,4 +1,3 @@
-
 pub trait Solution {
     const NAME: &'static str;
 

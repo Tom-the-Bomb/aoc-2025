@@ -1,9 +1,9 @@
 //! Day 2: Gift Shop
 //!
 //! <https://adventofcode.com/2025/day/2>
-use std::sync::LazyLock;
-use fancy_regex::Regex;
 use aoc_2025::Solution;
+use fancy_regex::Regex;
+use std::sync::LazyLock;
 
 static PAT: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"^([0-9]+)\1+$").unwrap());
 
@@ -12,12 +12,10 @@ pub struct Day2;
 impl Day2 {
     #[inline]
     fn get_ids(inp: &str) -> impl Iterator<Item = usize> + '_ {
-        inp
-            .split(',')
-            .flat_map(|s| {
-                let (a, b) = s.split_once('-').unwrap();
-                a.parse().unwrap()..=b.parse().unwrap()
-            })
+        inp.split(',').flat_map(|s| {
+            let (a, b) = s.split_once('-').unwrap();
+            a.parse().unwrap()..=b.parse().unwrap()
+        })
     }
 }
 
@@ -37,10 +35,7 @@ impl Solution for Day2 {
 
     fn part_two(&self, inp: &str) -> Self::OutputP2 {
         Self::get_ids(inp)
-            .filter(|id|
-                PAT.is_match(&id.to_string())
-                    .unwrap_or(false)
-            )
+            .filter(|id| PAT.is_match(&id.to_string()).unwrap_or(false))
             .sum()
     }
 
@@ -65,5 +60,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test() { main(); }
+    fn test() {
+        main();
+    }
 }

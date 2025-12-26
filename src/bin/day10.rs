@@ -3,56 +3,47 @@
 //! <https://adventofcode.com/2025/day/10>
 #![feature(strip_circumfix)]
 
-use itertools::Itertools;
-use good_lp::{
-    variables,
-    variable,
-    Expression,
-    default_solver,
-    SolverModel,
-    Solution as _
-};
 use aoc_2025::Solution;
+use good_lp::{default_solver, variable, variables, Expression, Solution as _, SolverModel};
+use itertools::Itertools;
 
 pub struct Day10;
 
 impl Day10 {
     #[inline]
     fn parse_input(inp: &str) -> impl Iterator<Item = (&[u8], Vec<Vec<usize>>, Vec<u32>)> {
-        inp
-            .lines()
-            .map(|line| {
-                let mut parts = line.split_whitespace();
+        inp.lines().map(|line| {
+            let mut parts = line.split_whitespace();
 
-                let lights = parts
-                    .next()
-                    .unwrap()
-                    .strip_circumfix('[', ']')
-                    .unwrap()
-                    .as_bytes();
+            let lights = parts
+                .next()
+                .unwrap()
+                .strip_circumfix('[', ']')
+                .unwrap()
+                .as_bytes();
 
-                let joltages = parts
-                    .next_back()
-                    .unwrap()
-                    .strip_circumfix('{', '}')
-                    .unwrap()
-                    .split(',')
-                    .map(|x| x.parse().unwrap())
-                    .collect();
+            let joltages = parts
+                .next_back()
+                .unwrap()
+                .strip_circumfix('{', '}')
+                .unwrap()
+                .split(',')
+                .map(|x| x.parse().unwrap())
+                .collect();
 
-                let schematics = parts
-                    .map(|schematic| {
-                        schematic
-                            .strip_circumfix('(', ')')
-                            .unwrap()
-                            .split(',')
-                            .map(|x| x.parse().unwrap())
-                            .collect()
-                    })
-                    .collect();
+            let schematics = parts
+                .map(|schematic| {
+                    schematic
+                        .strip_circumfix('(', ')')
+                        .unwrap()
+                        .split(',')
+                        .map(|x| x.parse().unwrap())
+                        .collect()
+                })
+                .collect();
 
-                (lights, schematics, joltages)
-            })
+            (lights, schematics, joltages)
+        })
     }
 }
 
@@ -64,10 +55,7 @@ impl Solution for Day10 {
 
         for (target, schematics, _) in Self::parse_input(inp) {
             'outer: for n in 1.. {
-                for combo in schematics
-                    .iter()
-                    .combinations_with_replacement(n)
-                {
+                for combo in schematics.iter().combinations_with_replacement(n) {
                     let mut lights = vec![b'.'; target.len()];
 
                     for schematic in combo {
@@ -95,31 +83,21 @@ impl Solution for Day10 {
 
         for (_, schematics, target) in Self::parse_input(inp) {
             let mut problem = variables!();
-            let vars: Vec<good_lp::Variable> = problem.add_all(
-                (0..schematics.len())
-                    .map(|_| variable().integer().min(0))
-            );
+            let vars: Vec<good_lp::Variable> =
+                problem.add_all((0..schematics.len()).map(|_| variable().integer().min(0)));
             let objective = vars.iter().sum::<Expression>();
 
             total += problem
                 .minimise(&objective)
                 .using(default_solver)
-                .with_all(
-                    target
+                .with_all(target.iter().enumerate().map(|(i, &joltage)| {
+                    schematics
                         .iter()
                         .enumerate()
-                        .map(|(i, &joltage)|
-                            schematics
-                                .iter()
-                                .enumerate()
-                                .filter_map(|(s, schematic)|
-                                    schematic.contains(&i)
-                                        .then_some(&vars[s])
-                                )
-                                .sum::<Expression>()
-                                .eq(joltage)
-                        )
-                )
+                        .filter_map(|(s, schematic)| schematic.contains(&i).then_some(&vars[s]))
+                        .sum::<Expression>()
+                        .eq(joltage)
+                }))
                 .solve()
                 .unwrap()
                 .eval(&objective);
@@ -194,5 +172,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test() { main(); }
+    fn test() {
+        main();
+    }
 }

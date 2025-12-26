@@ -1,18 +1,12 @@
-use std::{
-    env,
-    time::Instant,
-    process::Command,
-};
+use std::{env, process::Command, time::Instant};
 
 fn run_bin_day(day: u8) -> Option<String> {
     let cmd = Command::new("cargo")
         .args(["run", "--release", "--bin", &format!("day{day}")])
         .output()
         .unwrap();
-    let stdout = String::from_utf8(cmd.stdout)
-        .unwrap();
-    let stderr = String::from_utf8(cmd.stderr)
-        .unwrap();
+    let stdout = String::from_utf8(cmd.stdout).unwrap();
+    let stderr = String::from_utf8(cmd.stderr).unwrap();
     match (stdout.is_empty(), stderr.is_empty()) {
         (false, true) => Some(stdout),
         (false, false) => Some(format!("{stdout}{stderr}")),
@@ -27,7 +21,8 @@ fn main() {
         .get(1)
         .and_then(|x| x.parse::<u8>().ok())
     {
-        println!("{}",
+        println!(
+            "{}",
             run_bin_day(day)
                 .unwrap_or_else(|| format!("Solution does not exist yet for day {day}"))
         );
@@ -39,13 +34,7 @@ fn main() {
             println!("{output}");
             day += 1;
         }
-        let text = format!(
-            "[Total Execution time: {:?}]",
-            instant.elapsed(),
-        );
-        println!(
-            "{text}\n{}",
-            "=".repeat(text.chars().count())
-        );
+        let text = format!("[Total Execution time: {:?}]", instant.elapsed(),);
+        println!("{text}\n{}", "=".repeat(text.chars().count()));
     }
 }

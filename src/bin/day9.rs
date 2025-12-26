@@ -1,8 +1,8 @@
 //! Day 9: Movie Theater
 //!
 //! <https://adventofcode.com/2025/day/9>
-use itertools::Itertools;
 use aoc_2025::Solution;
+use itertools::Itertools;
 
 type Point = (usize, usize);
 
@@ -12,15 +12,11 @@ impl Day9 {
     #[must_use]
     #[inline]
     fn parse_input(inp: &str) -> Vec<Point> {
-        inp
-            .lines()
+        inp.lines()
             .map(|line| {
                 let (a, b) = line.split_once(',').unwrap();
 
-                (
-                    a.parse().unwrap(),
-                    b.parse().unwrap(),
-                )
+                (a.parse().unwrap(), b.parse().unwrap())
             })
             .collect()
     }
@@ -63,17 +59,10 @@ impl Day9 {
         let end2 = line2_start.max(line2_end);
 
         if start1.0 == end1.0 {
-            start2.0 < start1.0
-            && start1.0 < end2.0
-            && start1.1 < start2.1
-            && start2.1 < end1.1
+            start2.0 < start1.0 && start1.0 < end2.0 && start1.1 < start2.1 && start2.1 < end1.1
         } else {
-            start1.0 < start2.0
-            && start2.0 < end1.0
-            && start2.1 < start1.1
-            && start1.1 < end2.1
+            start1.0 < start2.0 && start2.0 < end1.0 && start2.1 < start1.1 && start1.1 < end2.1
         }
-
     }
 }
 impl Solution for Day9 {
@@ -83,9 +72,7 @@ impl Solution for Day9 {
         Self::parse_input(inp)
             .iter()
             .tuple_combinations()
-            .map(|(&(x1, y1), &(x2, y2))|
-                (x2.abs_diff(x1) + 1) * (y2.abs_diff(y1) + 1)
-            )
+            .map(|(&(x1, y1), &(x2, y2))| (x2.abs_diff(x1) + 1) * (y2.abs_diff(y1) + 1))
             .max()
             .unwrap()
     }
@@ -167,5 +154,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test() { main(); }
+    fn test() {
+        main();
+    }
 }

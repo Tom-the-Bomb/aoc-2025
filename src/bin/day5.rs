@@ -11,9 +11,7 @@ impl Solution for Day5 {
     fn part_one(&self, inp: &str) -> Self::OutputP1 {
         let inp = inp.replace('\r', "");
 
-        let (ranges, ingredients) = inp
-            .split_once("\n\n")
-            .unwrap();
+        let (ranges, ingredients) = inp.split_once("\n\n").unwrap();
 
         let ranges = ranges
             .lines()
@@ -26,13 +24,12 @@ impl Solution for Day5 {
 
         ingredients
             .lines()
-            .filter(|ingredient| ranges
-                .iter()
-                .any(|&(a, b)| {
+            .filter(|ingredient| {
+                ranges.iter().any(|&(a, b)| {
                     let ingredient = ingredient.parse().unwrap();
                     a <= ingredient && ingredient <= b
                 })
-            )
+            })
             .count()
     }
 
@@ -66,10 +63,7 @@ impl Solution for Day5 {
             }
         }
 
-        ranges
-            .into_iter()
-            .map(|(a, b)| b - a + 1)
-            .sum()
+        ranges.into_iter().map(|(a, b)| b - a + 1).sum()
     }
 
     fn run(&self, inp: String) {
@@ -93,5 +87,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test() { main(); }
+    fn test() {
+        main();
+    }
 }

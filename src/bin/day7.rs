@@ -1,7 +1,7 @@
 //! Day 7: Laboratories
 //!
 //! <https://adventofcode.com/2025/day/7>
-use aoc_2025::{Solution, get_grid};
+use aoc_2025::{get_grid, Solution};
 
 pub struct Day7;
 
@@ -43,8 +43,7 @@ impl Solution for Day7 {
         let mut grid = inp
             .lines()
             .map(|line| {
-                line
-                    .bytes()
+                line.bytes()
                     .map(|cell| match cell {
                         b'.' => 0isize,
                         b'S' => 1,
@@ -76,12 +75,7 @@ impl Solution for Day7 {
                 }
             }
         }
-        grid
-            .last()
-            .unwrap()
-            .iter()
-            .sum::<isize>()
-            .cast_unsigned()
+        grid.last().unwrap().iter().sum::<isize>().cast_unsigned()
     }
 
     fn run(&self, inp: String) {
@@ -105,5 +99,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test() { main(); }
+    fn test() {
+        main();
+    }
 }

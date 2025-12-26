@@ -1,8 +1,8 @@
 //! Day 12: Christmas Tree Farm
 //!
 //! <https://adventofcode.com/2025/day/12>
-use std::collections::VecDeque;
 use aoc_2025::Solution;
+use std::collections::VecDeque;
 
 pub struct Day12;
 
@@ -12,22 +12,13 @@ impl Solution for Day12 {
     fn part_one(&self, inp: &str) -> Self::OutputP1 {
         let inp = inp.replace('\r', "");
 
-        let mut parts = inp
-            .split("\n\n")
-            .collect::<VecDeque<_>>();
+        let mut parts = inp.split("\n\n").collect::<VecDeque<_>>();
 
-        let regions = parts
-            .pop_back()
-            .unwrap()
-            .lines();
+        let regions = parts.pop_back().unwrap().lines();
 
         let shape_sizes = parts
             .into_iter()
-            .map(|shape| shape
-                .bytes()
-                .filter(|&c| c == b'#')
-                .count()
-            )
+            .map(|shape| shape.bytes().filter(|&c| c == b'#').count())
             .collect::<Vec<_>>();
 
         regions
@@ -42,8 +33,9 @@ impl Solution for Day12 {
                     .split_whitespace()
                     .enumerate()
                     .map(|(i, count)| shape_sizes[i] * count.parse::<usize>().unwrap())
-                    .sum::<usize>() <= w * h
-                })
+                    .sum::<usize>()
+                    <= w * h
+            })
             .count()
     }
 
@@ -69,5 +61,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test() { main(); }
+    fn test() {
+        main();
+    }
 }

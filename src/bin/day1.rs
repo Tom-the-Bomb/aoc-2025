@@ -11,13 +11,14 @@ impl Solution for Day1 {
     fn part_one(&self, inp: &str) -> Self::OutputP1 {
         let mut dial = 50;
 
-        inp
-            .lines()
+        inp.lines()
             .filter(|line| {
                 let (op, val) = line.split_at(1);
                 let mut val = val.parse::<isize>().unwrap();
 
-                if op == "L" { val *= -1; }
+                if op == "L" {
+                    val *= -1;
+                }
 
                 dial += val;
                 dial = dial.rem_euclid(100);
@@ -30,13 +31,14 @@ impl Solution for Day1 {
     fn part_two(&self, inp: &str) -> Self::OutputP2 {
         let mut dial = 50;
 
-        inp
-            .lines()
+        inp.lines()
             .map(|line| {
                 let (op, val) = line.split_at(1);
                 let mut val = val.parse::<isize>().unwrap();
 
-                if op == "L" { val *= -1; }
+                if op == "L" {
+                    val *= -1;
+                }
 
                 let mut zeroes = if dial == 0 && val < 0 { -1 } else { 0 };
                 dial += val;
@@ -44,11 +46,14 @@ impl Solution for Day1 {
                 zeroes += dial.div_euclid(100).abs();
                 dial = dial.rem_euclid(100);
 
-                if dial == 0 && val < 0 { zeroes += 1; }
+                if dial == 0 && val < 0 {
+                    zeroes += 1;
+                }
 
                 zeroes
             })
-            .sum::<isize>().cast_unsigned()
+            .sum::<isize>()
+            .cast_unsigned()
     }
 
     fn run(&self, inp: String) {
@@ -72,5 +77,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test() { main(); }
+    fn test() {
+        main();
+    }
 }

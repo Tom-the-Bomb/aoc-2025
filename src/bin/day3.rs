@@ -8,27 +8,25 @@ pub struct Day3;
 impl Day3 {
     #[must_use]
     fn compute_max(inp: &str, n: usize) -> usize {
-        inp
-            .lines()
+        inp.lines()
             .flat_map(|line| {
                 let line = line.as_bytes();
                 let mut max_i = 0;
 
-                (0..n).rev()
-                    .map(move |exp| {
-                        if exp < n - 1 {
-                            max_i += 1;
-                        }
+                (0..n).rev().map(move |exp| {
+                    if exp < n - 1 {
+                        max_i += 1;
+                    }
 
-                        #[allow(clippy::mut_range_bound)]
-                        for i in max_i..line.len() - exp {
-                            if line[i] > line[max_i] {
-                                max_i = i;
-                            }
+                    #[allow(clippy::mut_range_bound)]
+                    for i in max_i..line.len() - exp {
+                        if line[i] > line[max_i] {
+                            max_i = i;
                         }
-                        (line[max_i] as char).to_digit(10).unwrap() as usize
-                            * (10usize).pow(u32::try_from(exp).unwrap())
-                    })
+                    }
+                    (line[max_i] as char).to_digit(10).unwrap() as usize
+                        * (10usize).pow(u32::try_from(exp).unwrap())
+                })
             })
             .sum::<usize>()
     }
@@ -66,5 +64,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test() { main(); }
+    fn test() {
+        main();
+    }
 }

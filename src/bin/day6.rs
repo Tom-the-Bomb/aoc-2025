@@ -1,7 +1,7 @@
 //! Day 6: Trash Compactor
 //!
 //! <https://adventofcode.com/2025/day/6>
-use aoc_2025::{Solution, get_grid};
+use aoc_2025::{get_grid, Solution};
 
 pub struct Day6;
 
@@ -19,8 +19,7 @@ impl Solution for Day6 {
 
         (0..n_cols)
             .map(|j| {
-                let iter = (0..n_rows - 1)
-                    .map(|i| grid[i][j].parse::<usize>().unwrap());
+                let iter = (0..n_rows - 1).map(|i| grid[i][j].parse::<usize>().unwrap());
 
                 if grid.last().unwrap()[j] == "*" {
                     iter.product::<usize>()
@@ -35,11 +34,7 @@ impl Solution for Day6 {
         let grid = get_grid(inp);
 
         let n_rows = grid.len();
-        let n_cols = grid
-            .iter()
-            .map(Vec::len)
-            .max()
-            .unwrap();
+        let n_cols = grid.iter().map(Vec::len).max().unwrap();
 
         let mut total = 0;
         let mut curr = 0;
@@ -92,5 +87,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test() { main(); }
+    fn test() {
+        main();
+    }
 }

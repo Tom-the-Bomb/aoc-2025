@@ -1,8 +1,8 @@
 //! Day 11: Reactor
 //!
 //! <https://adventofcode.com/2025/day/11>
-use std::collections::HashMap;
 use aoc_2025::Solution;
+use std::collections::HashMap;
 
 pub struct Day11;
 
@@ -12,8 +12,7 @@ impl Day11 {
     #[must_use]
     #[inline]
     fn parse_input(inp: &str) -> Graph<'_> {
-        inp
-            .lines()
+        inp.lines()
             .map(|line| {
                 let (from, to) = line.split_once(':').unwrap();
 
@@ -113,5 +112,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test() { main(); }
+    fn test() {
+        main();
+    }
 }

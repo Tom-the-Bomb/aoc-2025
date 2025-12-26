@@ -1,9 +1,6 @@
 #![feature(associated_type_defaults)]
 
-use std::{
-    time::Instant,
-    fs::read_to_string
-};
+use std::{fs::read_to_string, time::Instant};
 
 pub use solution::*;
 pub use util::*;
@@ -23,10 +20,7 @@ pub fn get_input(day: u8) -> String {
 
 pub fn run_day<D: Solution>(day: u8, cls: &D) {
     let text = format!(" Day [{day}] Solution - {} ", cls.name());
-    let line = format!(
-        "+------+{}+",
-        "-".repeat(text.chars().count())
-    );
+    let line = format!("+------+{}+", "-".repeat(text.chars().count()));
     println!("\n{line}\n| RUST |{text}|\n{line}");
 
     let input = get_input(day);
@@ -34,8 +28,5 @@ pub fn run_day<D: Solution>(day: u8, cls: &D) {
     let instant = Instant::now();
     cls.run(input);
     let text = format!("Execution time: {:?}", instant.elapsed());
-    println!(
-        "{text}\n{}",
-        "=".repeat(text.chars().count())
-    );
+    println!("{text}\n{}", "=".repeat(text.chars().count()));
 }
