@@ -5,7 +5,6 @@
 
 use std::{
     collections::{HashSet, HashMap},
-    fmt::Display,
     hash::Hash,
 };
 use itertools::Itertools;
@@ -81,9 +80,8 @@ pub struct Day8;
 impl Day8 {
     #[must_use]
     #[inline]
-    fn parse_input<T: Display>(inp: T) -> (Vec<BoxT>, Vec<(BoxT, BoxT)>) {
+    fn parse_input(inp: &str) -> (Vec<BoxT>, Vec<(BoxT, BoxT)>) {
         let boxes = inp
-            .to_string()
             .lines()
             .map(|line| {
                 line
@@ -113,7 +111,7 @@ impl Day8 {
 impl Solution for Day8 {
     const NAME: &'static str = "Playground";
 
-    fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1 {
+    fn part_one(&self, inp: &str) -> Self::OutputP1 {
         let (boxes, edges) = Self::parse_input(inp);
         let mut sets = DisjointSet::new(&boxes);
 
@@ -129,7 +127,7 @@ impl Solution for Day8 {
             .product()
     }
 
-    fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2 {
+    fn part_two(&self, inp: &str) -> Self::OutputP2 {
         let (boxes, edges) = Self::parse_input(inp);
         let mut sets = DisjointSet::new(&boxes);
 

@@ -15,7 +15,6 @@ lto = "fat"
 
 [dependencies]
 fancy-regex = "^0.17"
-lazy_static = "^1.5"
 itertools = "^0.14"
 good_lp = { version = "^1.14", features = ["microlp"], default-features = false }
 

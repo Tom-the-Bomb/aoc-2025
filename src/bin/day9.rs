@@ -1,7 +1,6 @@
 //! Day 9: Movie Theater
 //!
 //! <https://adventofcode.com/2025/day/9>
-use std::fmt::Display;
 use itertools::Itertools;
 use aoc_2025::Solution;
 
@@ -12,9 +11,8 @@ pub struct Day9;
 impl Day9 {
     #[must_use]
     #[inline]
-    fn parse_input<T: Display>(inp: T) -> Vec<Point> {
+    fn parse_input(inp: &str) -> Vec<Point> {
         inp
-            .to_string()
             .lines()
             .map(|line| {
                 let (a, b) = line.split_once(',').unwrap();
@@ -81,7 +79,7 @@ impl Day9 {
 impl Solution for Day9 {
     const NAME: &'static str = "Movie Theater";
 
-    fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1 {
+    fn part_one(&self, inp: &str) -> Self::OutputP1 {
         Self::parse_input(inp)
             .iter()
             .tuple_combinations()
@@ -92,7 +90,7 @@ impl Solution for Day9 {
             .unwrap()
     }
 
-    fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2 {
+    fn part_two(&self, inp: &str) -> Self::OutputP2 {
         let points = Self::parse_input(inp);
         let mut max_area = 0;
 

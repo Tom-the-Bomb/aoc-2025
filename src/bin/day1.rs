@@ -1,7 +1,6 @@
 //! Day 1: Secret Entrance
 //!
 //! <https://adventofcode.com/2025/day/1>
-use std::fmt::Display;
 use aoc_2025::Solution;
 
 pub struct Day1;
@@ -9,11 +8,10 @@ pub struct Day1;
 impl Solution for Day1 {
     const NAME: &'static str = "Secret Entrance";
 
-    fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1 {
+    fn part_one(&self, inp: &str) -> Self::OutputP1 {
         let mut dial = 50;
 
         inp
-            .to_string()
             .lines()
             .filter(|line| {
                 let (op, val) = line.split_at(1);
@@ -29,11 +27,10 @@ impl Solution for Day1 {
             .count()
     }
 
-    fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2 {
+    fn part_two(&self, inp: &str) -> Self::OutputP2 {
         let mut dial = 50;
 
         inp
-            .to_string()
             .lines()
             .map(|line| {
                 let (op, val) = line.split_at(1);

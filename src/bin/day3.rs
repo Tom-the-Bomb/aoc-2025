@@ -1,15 +1,14 @@
 //! Day 3: Lobby
 //!
 //! <https://adventofcode.com/2025/day/3>
-use std::fmt::Display;
 use aoc_2025::Solution;
 
 pub struct Day3;
 
 impl Day3 {
     #[must_use]
-    fn compute_max<T: Display>(inp: T, n: usize) -> usize {
-        inp.to_string()
+    fn compute_max(inp: &str, n: usize) -> usize {
+        inp
             .lines()
             .flat_map(|line| {
                 let line = line.as_bytes();
@@ -38,11 +37,11 @@ impl Day3 {
 impl Solution for Day3 {
     const NAME: &'static str = "Lobby";
 
-    fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1 {
+    fn part_one(&self, inp: &str) -> Self::OutputP1 {
         Self::compute_max(inp, 2)
     }
 
-    fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2 {
+    fn part_two(&self, inp: &str) -> Self::OutputP2 {
         Self::compute_max(inp, 12)
     }
 

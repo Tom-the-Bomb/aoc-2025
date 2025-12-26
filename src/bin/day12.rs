@@ -1,10 +1,7 @@
 //! Day 12: Christmas Tree Farm
 //!
 //! <https://adventofcode.com/2025/day/12>
-use std::{
-    collections::VecDeque,
-    fmt::Display,
-};
+use std::collections::VecDeque;
 use aoc_2025::Solution;
 
 pub struct Day12;
@@ -12,10 +9,8 @@ pub struct Day12;
 impl Solution for Day12 {
     const NAME: &'static str = "Christmas Tree Farm";
 
-    fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1 {
-        let inp = inp
-            .to_string()
-            .replace('\r', "");
+    fn part_one(&self, inp: &str) -> Self::OutputP1 {
+        let inp = inp.replace('\r', "");
 
         let mut parts = inp
             .split("\n\n")
@@ -52,7 +47,7 @@ impl Solution for Day12 {
             .count()
     }
 
-    fn part_two<T: Display>(&self, _inp: T) -> Self::OutputP2 {
+    fn part_two(&self, _inp: &str) -> Self::OutputP2 {
         unimplemented!()
     }
 

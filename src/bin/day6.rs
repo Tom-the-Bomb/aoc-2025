@@ -1,7 +1,6 @@
 //! Day 6: Trash Compactor
 //!
 //! <https://adventofcode.com/2025/day/6>
-use std::fmt::Display;
 use aoc_2025::{Solution, get_grid};
 
 pub struct Day6;
@@ -9,9 +8,7 @@ pub struct Day6;
 impl Solution for Day6 {
     const NAME: &'static str = "Trash Compactor";
 
-    fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1 {
-        let inp = inp
-            .to_string();
+    fn part_one(&self, inp: &str) -> Self::OutputP1 {
         let grid = inp
             .lines()
             .map(|line| line.split_whitespace().collect::<Vec<_>>())
@@ -34,7 +31,7 @@ impl Solution for Day6 {
             .sum()
     }
 
-    fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2 {
+    fn part_two(&self, inp: &str) -> Self::OutputP2 {
         let grid = get_grid(inp);
 
         let n_rows = grid.len();

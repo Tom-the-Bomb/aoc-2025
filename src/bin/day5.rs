@@ -1,7 +1,6 @@
 //! Day 5: Cafeteria
 //!
 //! <https://adventofcode.com/2025/day/5>
-use std::fmt::Display;
 use aoc_2025::Solution;
 
 pub struct Day5;
@@ -9,10 +8,8 @@ pub struct Day5;
 impl Solution for Day5 {
     const NAME: &'static str = "Cafeteria";
 
-    fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1 {
-        let inp = inp
-            .to_string()
-            .replace('\r', "");
+    fn part_one(&self, inp: &str) -> Self::OutputP1 {
+        let inp = inp.replace('\r', "");
 
         let (ranges, ingredients) = inp
             .split_once("\n\n")
@@ -39,10 +36,8 @@ impl Solution for Day5 {
             .count()
     }
 
-    fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2 {
-        let inp = inp
-            .to_string()
-            .replace('\r', "");
+    fn part_two(&self, inp: &str) -> Self::OutputP2 {
+        let inp = inp.replace('\r', "");
 
         let mut ranges = inp
             .split_once("\n\n")

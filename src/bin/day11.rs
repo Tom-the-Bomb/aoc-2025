@@ -1,10 +1,7 @@
 //! Day 11: Reactor
 //!
 //! <https://adventofcode.com/2025/day/11>
-use std::{
-    collections::HashMap,
-    fmt::Display,
-};
+use std::collections::HashMap;
 use aoc_2025::Solution;
 
 pub struct Day11;
@@ -83,16 +80,14 @@ impl Day11 {
 impl Solution for Day11 {
     const NAME: &'static str = "Reactor";
 
-    fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1 {
-        let inp = inp.to_string();
-        let graph = Self::parse_input(&inp);
+    fn part_one(&self, inp: &str) -> Self::OutputP1 {
+        let graph = Self::parse_input(inp);
         let mut cache = HashMap::new();
         Self::dfs_1(&mut cache, &graph, "you")
     }
 
-    fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2 {
-        let inp = inp.to_string();
-        let graph = Self::parse_input(&inp);
+    fn part_two(&self, inp: &str) -> Self::OutputP2 {
+        let graph = Self::parse_input(inp);
         let mut cache = HashMap::new();
         Self::dfs_2(&mut cache, &graph, "svr", false, false)
     }

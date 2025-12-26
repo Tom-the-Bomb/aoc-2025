@@ -1,15 +1,18 @@
 //! Day 4: Printing Department
 //!
 //! <https://adventofcode.com/2025/day/4>
-use std::fmt::Display;
-use aoc_2025::{Solution, get_grid, neighbors};
+use aoc_2025::{
+    Solution,
+    get_grid,
+    neighbors
+};
 
 pub struct Day4;
 
 impl Solution for Day4 {
     const NAME: &'static str = "Printing Department";
 
-    fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1 {
+    fn part_one(&self, inp: &str) -> Self::OutputP1 {
         let grid = get_grid(inp);
 
         let n_rows = 0..grid.len();
@@ -31,7 +34,7 @@ impl Solution for Day4 {
             .sum()
     }
 
-    fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2 {
+    fn part_two(&self, inp: &str) -> Self::OutputP2 {
         let mut grid = get_grid(inp);
 
         let n_rows = grid.len();

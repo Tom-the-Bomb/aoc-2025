@@ -1,4 +1,3 @@
-use std::fmt::Display;
 
 pub trait Solution {
     const NAME: &'static str;
@@ -6,9 +5,9 @@ pub trait Solution {
     type OutputP1 = usize;
     type OutputP2 = usize;
 
-    fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1;
+    fn part_one(&self, inp: &str) -> Self::OutputP1;
 
-    fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2;
+    fn part_two(&self, inp: &str) -> Self::OutputP2;
 
     fn run(&self, inp: String);
 

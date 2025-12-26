@@ -3,7 +3,6 @@
 //! <https://adventofcode.com/2025/day/10>
 #![feature(strip_circumfix)]
 
-use std::fmt::Display;
 use itertools::Itertools;
 use good_lp::{
     variables,
@@ -60,10 +59,10 @@ impl Day10 {
 impl Solution for Day10 {
     const NAME: &'static str = "Factory";
 
-    fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1 {
+    fn part_one(&self, inp: &str) -> Self::OutputP1 {
         let mut total = 0;
 
-        for (target, schematics, _) in Self::parse_input(&inp.to_string()) {
+        for (target, schematics, _) in Self::parse_input(inp) {
             'outer: for n in 1.. {
                 for combo in schematics
                     .iter()
@@ -91,10 +90,10 @@ impl Solution for Day10 {
     }
 
     #[allow(clippy::cast_sign_loss, clippy::cast_possible_truncation)]
-    fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2 {
+    fn part_two(&self, inp: &str) -> Self::OutputP2 {
         let mut total = 0.0;
 
-        for (_, schematics, target) in Self::parse_input(&inp.to_string()) {
+        for (_, schematics, target) in Self::parse_input(inp) {
             let mut problem = variables!();
             let vars: Vec<good_lp::Variable> = problem.add_all(
                 (0..schematics.len())
@@ -130,10 +129,10 @@ impl Solution for Day10 {
 
     // Z3 approach (doesn't work)
     //
-    // fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2 {
+    // fn part_two(&self, inp: &str) -> Self::OutputP2 {
     //     let mut total = 0;
 
-    //     for (_, schematics, target) in Self::parse_input(&inp.to_string()) {
+    //     for (_, schematics, target) in Self::parse_input(inp) {
     //         let opt = Optimize::new();
 
     //         let vars = (0..schematics.len())

@@ -1,7 +1,6 @@
 //! Day 7: Laboratories
 //!
 //! <https://adventofcode.com/2025/day/7>
-use std::fmt::Display;
 use aoc_2025::{Solution, get_grid};
 
 pub struct Day7;
@@ -9,7 +8,7 @@ pub struct Day7;
 impl Solution for Day7 {
     const NAME: &'static str = "Laboratories";
 
-    fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1 {
+    fn part_one(&self, inp: &str) -> Self::OutputP1 {
         let mut grid = get_grid(inp);
 
         let n_rows = grid.len();
@@ -40,9 +39,8 @@ impl Solution for Day7 {
         split
     }
 
-    fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2 {
+    fn part_two(&self, inp: &str) -> Self::OutputP2 {
         let mut grid = inp
-            .to_string()
             .lines()
             .map(|line| {
                 line

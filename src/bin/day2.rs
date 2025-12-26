@@ -1,7 +1,7 @@
 //! Day 2: Gift Shop
 //!
 //! <https://adventofcode.com/2025/day/2>
-use std::{fmt::Display, sync::LazyLock};
+use std::sync::LazyLock;
 use fancy_regex::Regex;
 use aoc_2025::Solution;
 
@@ -24,8 +24,8 @@ impl Day2 {
 impl Solution for Day2 {
     const NAME: &'static str = "Gift Shop";
 
-    fn part_one<T: Display>(&self, inp: T) -> Self::OutputP1 {
-        Self::get_ids(&inp.to_string())
+    fn part_one(&self, inp: &str) -> Self::OutputP1 {
+        Self::get_ids(inp)
             .filter(|id| {
                 let str_id = id.to_string();
                 let (a, b) = str_id.split_at(str_id.len() / 2);
@@ -35,8 +35,8 @@ impl Solution for Day2 {
             .sum()
     }
 
-    fn part_two<T: Display>(&self, inp: T) -> Self::OutputP2 {
-        Self::get_ids(&inp.to_string())
+    fn part_two(&self, inp: &str) -> Self::OutputP2 {
+        Self::get_ids(inp)
             .filter(|id|
                 PAT.is_match(&id.to_string())
                     .unwrap_or(false)
