@@ -4,7 +4,7 @@
 #![feature(strip_circumfix)]
 
 use aoc_2025::Solution;
-use good_lp::{default_solver, variable, variables, Expression, Solution as _, SolverModel};
+use good_lp::{default_solver, variable, variables, Expression, Solution as _, Variable, SolverModel};
 use itertools::Itertools;
 
 pub struct Day10;
@@ -83,7 +83,7 @@ impl Solution for Day10 {
 
         for (_, schematics, target) in Self::parse_input(inp) {
             let mut problem = variables!();
-            let vars: Vec<good_lp::Variable> =
+            let vars: Vec<Variable> =
                 problem.add_all((0..schematics.len()).map(|_| variable().integer().min(0)));
             let objective = vars.iter().sum::<Expression>();
 
