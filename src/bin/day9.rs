@@ -65,6 +65,7 @@ impl Day9 {
         }
     }
 }
+
 impl Solution for Day9 {
     const NAME: &'static str = "Movie Theater";
 

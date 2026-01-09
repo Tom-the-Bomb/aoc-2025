@@ -4,7 +4,9 @@
 #![feature(strip_circumfix)]
 
 use aoc_2025::Solution;
-use good_lp::{default_solver, variable, variables, Expression, Solution as _, Variable, SolverModel};
+use good_lp::{
+    default_solver, variable, variables, Expression, Solution as _, SolverModel, Variable,
+};
 use itertools::Itertools;
 
 pub struct Day10;
